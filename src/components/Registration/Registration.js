@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import register from '../../actions/userfunction'
+import 'reactjs-toastr/lib/toast.css';
+
 
 class Register extends Component {
     constructor() {
@@ -7,7 +9,8 @@ class Register extends Component {
         this.state = {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            answer: ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -26,8 +29,14 @@ class Register extends Component {
         }
 
         register(user).then(res => {
-            this.props.history.push('./login')
+         //   toastr.success(res, res, { displayDuration: 3000 })
+            this.setState({ answer: res })
+            this.props.history.push('/login');
         })
+        .catch(err => {
+            console.log(err);
+        })
+
     }
 
     render() {
