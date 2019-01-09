@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {shallow, mount, render} from 'enzyme';
 import Registration from '../src/components/Registration/Registration'
 
@@ -37,5 +37,13 @@ describe('Name Input',()=>{
         const wrapper = shallow(<Registration/>);
         wrapper.find('#name').simulate('change' , {target:{name:'name', value:'cats'}});
         expect(wrapper.state('name')).toEqual('cats');
+    })
+})
+
+describe('Password input',()=>{
+    it('should respond to change event and change the state of the Registration component',() => {
+        const wrapper = shallow(<Registration/>);
+        wrapper.find('#password').simulate('change',{target:{name:'password', value:'catspass'}});
+        expect(wrapper.state('password')).toEqual('catspass');
     })
 })
