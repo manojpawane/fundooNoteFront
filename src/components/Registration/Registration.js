@@ -51,6 +51,7 @@ class Register extends Component {
                                     <label htmlFor="name">Name</label>
                                     <input type="text"
                                         className="form-control"
+                                        id='name' 
                                         name="name"
                                         placeholder="Enter Name"
                                         value={this.state.name}
@@ -60,6 +61,7 @@ class Register extends Component {
                                     <label htmlFor="email">Email Address</label>
                                     <input type="email"
                                         className="form-control"
+                                        id='email'
                                         name="email"
                                         placeholder="Enter Email"
                                         value={this.state.email}
@@ -69,6 +71,7 @@ class Register extends Component {
                                     <label htmlFor="password">Password</label>
                                     <input type="password"
                                         className="form-control"
+                                        id='password'
                                         name="password"
                                         placeholder="Enter Password"
                                         value={this.state.password}
