@@ -6,9 +6,7 @@ export const register = newUser => {
             name: newUser.name,
             email: newUser.email,
             password: newUser.password
-
         })
-
 }
 
 export const login = user => {
@@ -27,5 +25,17 @@ export const login = user => {
 }
 
 
-export default register
+export const Verify = verifyToken =>{
+    return axios
+    .post('http://localhost:3000/user/confirmation',{
+        email:verifyToken.email,
+        token:verifyToken.token
+    })
+    .then(res => {
+        return res.data
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
 
