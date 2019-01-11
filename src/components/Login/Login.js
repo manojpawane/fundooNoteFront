@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { login } from '../../actions/userfunction';
-// import login from '../../actions/userfunction'
 
 class Login extends Component {
     constructor() {
@@ -18,7 +17,7 @@ class Login extends Component {
     }
 
     onSubmit(e) {
-         e.preventDefault()
+        e.preventDefault()
 
         const user = {
             email: this.state.email,
@@ -59,7 +58,15 @@ class Login extends Component {
                             </div>
                             <button type="submit" className="btn btn-primary">Login</button>
                         </form>
+                        <div className="col">
+                        <div className="row">
+                            <a href="/register" style={{marginLeft: '159px',paddingRight:'6px'}}>Registration</a>
+                            <div style={{borderLeft: '1px solid #222',height: '21px', marginTop:'2px'}}></div>
+                            <a href="/register" style={{paddingLeft:'6px'}}>forget Password</a>
+                        </div>
                     </div>
+                    </div>
+                   
                 </div>
             </div>
         )
