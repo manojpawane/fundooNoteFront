@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React,{Component}  from 'react';
+import  '../setup.Tests'
 import {shallow, mount, render} from 'enzyme';
 import Registration from '../src/components/Registration/Registration'
 
