@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import {register} from '../../actions/userfunction'
 import 'reactjs-toastr/lib/toast.css';
 
+/**
+ * Register class for user registration
+ */
 class Register extends Component {
     constructor() {
         super()

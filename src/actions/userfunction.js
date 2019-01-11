@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+/**
+ * Ajax call for user registration
+ * @param {*} newUser 
+ */
 export const register = newUser => {
     return axios
         .post('user/create', {
@@ -9,6 +13,10 @@ export const register = newUser => {
         })
 }
 
+/**
+ * Ajax call for user login
+ * @param {*} user 
+ */
 export const login = user => {
     return axios
         .post('user/login', {
@@ -24,7 +32,10 @@ export const login = user => {
         })
 }
 
-
+/**
+ * Ajax call for token verification
+ * @param {*} verifyToken 
+ */
 export const Verify = verifyToken =>{
     return axios
     .post('http://localhost:3000/user/confirmation',{
