@@ -50,3 +50,36 @@ export const Verify = verifyToken =>{
     })
 }
 
+/**
+ * sends the email to verify and to send reset password link to email
+ * @param {*} email 
+ */
+export const forgetPass = email =>{
+    return axios
+    .post('user/forgetPasswordResetLink',{
+        email:email.email
+    })
+    .then(res=>{
+        return res.data
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+}
+
+/**
+ * updates the new password
+ * @param {*} password 
+ */
+export const updatePassword = password =>{
+    return axios
+    .post('http://localhost:3000/user/updateNewPassword',{
+        password:password.password
+    })
+    .then(res => {
+        return res.data
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}

@@ -3,6 +3,8 @@ import Login from '../src/components/Login/Login'
 import Register from '../src/components/Registration/Registration'
 import VerifyToken from '../src/components/VerifyToken/VerifyToken'
 import Dashboard from '../src/components/Dashboard/Dashboard'
+import ForgetPassword from '../src/components/ForgetPassword/ForgetPassword'
+import UpdateNewPassword from '../src/components/ForgetPassword/UpdateNewPassword'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
@@ -16,6 +18,8 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/confirmation/:token" component={VerifyToken}/>
             <Route exact path="/dashboard" component={Dashboard}/>
+            <Route exact path="/forget/:token" component={ForgetPassword}/>
+            <Route exact path="/updatePassword" component={UpdateNewPassword}/>
           </div>
         </div>
       </Router>

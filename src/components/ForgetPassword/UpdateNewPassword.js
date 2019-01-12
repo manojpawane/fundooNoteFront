@@ -1,32 +1,29 @@
 import React, { Component } from 'react'
-import { forgetPass } from '../../actions/userfunction'
+import { updatePassword } from '../../actions/userfunction'
 
-/**
- * Forget password defination
- */
-class ForgetPassword extends Component {
+class UpdateNewPassword extends Component {
     constructor() {
         super()
         this.state = {
-            email: ''
+            newPassword: ''
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
+    onChange(e){
+        this.setState({[e.target.name]:e.target.value})
     }
 
-    onSubmit(e) {
+    onSubmit(e){
         e.preventDefault()
-        const email = {
-            email: this.state.email,
+        const password = {
+            password: this.state.newPassword,
         }
 
-        forgetPass(email).then(res => {
+        updatePassword(password).then(res => {
             if (res) {
-                alert('Reset password link had been send to your register mail id');
+                alert('New Password Updated, Please login through new Password');
                 this.props.history.push('/login');
             }
 
@@ -43,14 +40,14 @@ class ForgetPassword extends Component {
                     <div className="row">
                         <div className="col-md-6 mt-5 mx-auto">
                             <form noValidate onSubmit={this.onSubmit}>
-                                <h1 className="h3 mb-3 front-weight-normal">Please enter your email to reset your password</h1>
+                                <h1 className="h3 mb-3 front-weight-normal">Please enter New Password</h1>
                                 <div className="form-group">
-                                    <input type="email"
+                                    <input type="password"
                                         className="form-control"
-                                        id='email'
-                                        name='email'
-                                        placeholder="Enter Email"
-                                        value={this.state.email}
+                                        id='newPassword'
+                                        name='newPassword'
+                                        placeholder="Enter New Password"
+                                        value={this.state.newPassword}
                                         onChange={this.onChange}
                                     />
                                 </div>
@@ -64,4 +61,4 @@ class ForgetPassword extends Component {
     }
 }
 
-export default ForgetPassword
+export default UpdateNewPassword

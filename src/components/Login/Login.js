@@ -62,7 +62,7 @@ class Login extends Component {
                         <div className="row">
                             <a href="/register" style={{marginLeft: '159px',paddingRight:'6px'}}>Registration</a>
                             <div style={{borderLeft: '1px solid #222',height: '21px', marginTop:'2px'}}></div>
-                            <a href="/register" style={{paddingLeft:'6px'}}>forget Password</a>
+                            <a href="/forget" style={{paddingLeft:'6px'}}>forget Password</a>
                         </div>
                     </div>
                     </div>
