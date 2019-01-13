@@ -19,6 +19,7 @@ class UpdateNewPassword extends Component {
         e.preventDefault()
         const password = {
             password: this.state.newPassword,
+            token:this.props.match.params.token
         }
 
         updatePassword(password).then(res => {

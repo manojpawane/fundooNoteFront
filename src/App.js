@@ -18,8 +18,8 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/confirmation/:token" component={VerifyToken}/>
             <Route exact path="/dashboard" component={Dashboard}/>
-            <Route exact path="/forget/:token" component={ForgetPassword}/>
-            <Route exact path="/updatePassword" component={UpdateNewPassword}/>
+            <Route exact path="/forget" component={ForgetPassword}/>
+            <Route exact path="/updatePassword/:token" component={UpdateNewPassword}/>
           </div>
         </div>
       </Router>

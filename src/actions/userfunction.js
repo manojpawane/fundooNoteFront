@@ -56,7 +56,7 @@ export const Verify = verifyToken =>{
  */
 export const forgetPass = email =>{
     return axios
-    .post('user/forgetPasswordResetLink',{
+    .post('user/forgetpassword',{
         email:email.email
     })
     .then(res=>{
@@ -73,8 +73,9 @@ export const forgetPass = email =>{
  */
 export const updatePassword = password =>{
     return axios
-    .post('http://localhost:3000/user/updateNewPassword',{
-        password:password.password
+    .post('http://localhost:3000/user/updatePassword',{
+        password:password.password,
+        token:password.token
     })
     .then(res => {
         return res.data
