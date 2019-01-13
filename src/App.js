@@ -5,6 +5,7 @@ import VerifyToken from '../src/components/VerifyToken/VerifyToken'
 import Dashboard from '../src/components/Dashboard/Dashboard'
 import ForgetPassword from '../src/components/ForgetPassword/ForgetPassword'
 import UpdateNewPassword from '../src/components/ForgetPassword/UpdateNewPassword'
+import Header from '../src/components/Header/Header'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+        {localStorage.usertoken && <Header/> }
           <div className="container">
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
