@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,15 +11,13 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import { withRouter } from 'react-router-dom'
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {Colors} from 'material-ui/styles/colors';
+import Avatar from '@material-ui/core/Avatar';
 
 const styles = theme => ({
     root: {
         width: '100%',
-        color:'white'
+        color: 'white'
     },
     grow: {
         flexGrow: 1,
@@ -49,6 +47,9 @@ const styles = theme => ({
             width: 'auto',
         },
     },
+    avatar: {
+        margin: 10,
+      },
     searchIcon: {
         width: theme.spacing.unit * 9,
         height: '100%',
@@ -80,19 +81,6 @@ const styles = theme => ({
         },
     },
 });
-const muiTheme = getMuiTheme({
-    palette: {
-      textColor: Colors.darkBlack,
-      primary1Color: Colors.white,
-      primary2Color: Colors.indigo700,
-      accent1Color: Colors.redA200,
-      pickerHeaderColor: Colors.darkBlack,
-      alternateTextColor: Colors.redA200
-    },
-    appBar: {
-      height: 60,
-    },
-  });
 class Header extends Component {
     state = {
         anchorEl: null,
@@ -137,7 +125,7 @@ class Header extends Component {
                         </IconButton>
                         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                             Keep
-            </Typography>
+                        </Typography>
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
                                 <SearchIcon />
@@ -158,14 +146,14 @@ class Header extends Component {
                                 onClick={this.handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <AccountCircle />
-                            </IconButton>
+                        <Avatar alt="Remy Sharp" src={require('../../Assests/images/ironman.jpg')} className={classes.bigAvatar} />
+                        </IconButton>
                         </div>
 
                     </Toolbar>
                 </AppBar>
                 {renderMenu}
-                
+
             </div>
         );
     }

@@ -1,13 +1,13 @@
-import React,{Component} from 'react'
-import Header from '../Header/Header';
+import React, { Component } from 'react'
 
-class Dashboard extends Component{
-    render(){
-        return(
+import MiniDrawer from '../Drawer/Drawer'
+class Dashboard extends Component {
+    render() {
+        return (
             <div>
-                <Header/>
-                </div>
-            
+                <MiniDrawer />
+            </div>
+
         )
     }
 }
