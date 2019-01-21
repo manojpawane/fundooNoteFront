@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {register} from '../../actions/userfunction'
+import {register} from '../../Database/userfunction'
 import 'reactjs-toastr/lib/toast.css';
 
 /**

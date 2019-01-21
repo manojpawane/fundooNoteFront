@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Verify} from '../../actions/userfunction'
+import {Verify} from '../../Database/userfunction'
 
 class VerifyToken extends Component {
     constructor() {

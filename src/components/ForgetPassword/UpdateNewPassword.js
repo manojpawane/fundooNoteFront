@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { updatePassword } from '../../actions/userfunction'
+import { updatePassword } from '../../Database/userfunction'
 
 class UpdateNewPassword extends Component {
     constructor() {

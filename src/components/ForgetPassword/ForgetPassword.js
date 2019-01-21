@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { forgetPass } from '../../actions/userfunction'
+import { forgetPass } from '../../Database/userfunction'
 
 /**
  * Forget password defination
