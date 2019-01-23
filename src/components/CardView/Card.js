@@ -37,13 +37,12 @@ class CardNote extends Component{
             <div>
                 <Card style={cardStyle}>
                     <Typography variant="h5" style={cardTitle} component="h2" color="textSecondary" gutterBottom>
-                        Title
+                        {this.props.value.title}
                     </Typography>
                     <CardContent>
                         <Typography component="p">
-                            well meaning and kindly.
-                            {'"a benevolent smile"'}
-                        </Typography>
+                        {this.props.value.content}
+                            </Typography>
                     </CardContent>
                 </Card>
             </div>
