@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types';
 
 const styles = {
     card: {
@@ -23,14 +22,21 @@ const styles = {
     },
 };
 
+const cardStyle = {
+    maxWidth:'213px'
+}
 
-function CardNote(props) {
-    const { classes } = props
-    
-        return (
+const cardTitle = {
+    paddingLeft:'15px',
+    paddingTop:'8px'
+}
+
+class CardNote extends Component{
+    render(){
+        return(
             <div>
-                <Card>
-                    <Typography variant="h5" component="h2"  className={classes.title} color="textSecondary" gutterBottom>
+                <Card style={cardStyle}>
+                    <Typography variant="h5" style={cardTitle} component="h2" color="textSecondary" gutterBottom>
                         Title
                     </Typography>
                     <CardContent>
@@ -42,11 +48,8 @@ function CardNote(props) {
                 </Card>
             </div>
         )
-    
+    }
 }
 
-CardNote.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
 
 export default withRouter((withStyles(styles)(CardNote)))

@@ -7,7 +7,6 @@ class Dashboard extends Component {
             <div>
                 <MiniDrawer />
             </div>
-
         )
     }
 }

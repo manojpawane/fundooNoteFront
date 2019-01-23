@@ -25,7 +25,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import Card from '../CardView/Card'
+import CardNote from '../CardNote/NoteView'
 
 const drawerWidth = 240;
 
@@ -283,7 +283,7 @@ handleMenuClose = () => {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Card/>
+          <CardNote/>
         </main>
       </div>
     );

@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { executionAsyncId } from 'async_hooks';
 
-export const  getNotes = user =>{
-    return axios.get('note/getNote/' + user.userId)
+export const  getNotes = userId =>{
+    console.log('test'+userId);
+    
+    return axios.get('note/getNote/' + userId)
     .then(res =>{
         return res.data
     })
