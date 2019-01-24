@@ -48,6 +48,7 @@ class EditCard extends Component{
         updateNotes(note).then(res => {
          if(res){
              console.log('res '+res);
+             this.props.history.push('/dashboard');
          }
         })
         .catch(err => {

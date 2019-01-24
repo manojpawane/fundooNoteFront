@@ -42,7 +42,7 @@ class CardNote extends Component{
       }
     })
   }
-  
+ 
 
     render(){
         return(        

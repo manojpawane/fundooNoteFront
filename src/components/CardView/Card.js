@@ -32,6 +32,14 @@ const cardTitle = {
 }
 
 class CardNote extends Component{
+    componentDidUpdate(prevProps){
+        console.log('prevprops testing');
+        console.log(prevProps.value);
+        console.log('props:'+this.props.value.title) 
+        if(prevProps.value!==this.props.value){
+            this.props.value = this.props.value
+        }
+    }
     render(){
         return(
             <div>
