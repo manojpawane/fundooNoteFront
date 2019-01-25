@@ -32,12 +32,19 @@ const cardTitle = {
 }
 
 class CardNote extends Component{
+    constructor(props){
+        super(props)
+        this.state ={
+            title:this.props.value.title,
+            content:this.props.value.content
+        }
+    }
     componentDidUpdate(prevProps){
-        console.log('prevprops testing');
-        console.log(prevProps.value);
-        console.log('props:'+this.props.value.title) 
         if(prevProps.value!==this.props.value){
-            this.props.value = this.props.value
+            this.setState({
+                title:this.props.value.title,
+                content:this.props.value.content
+            })
         }
     }
     render(){
@@ -45,11 +52,11 @@ class CardNote extends Component{
             <div>
                 <Card style={cardStyle}>
                     <Typography variant="h5" style={cardTitle} component="h2" color="textSecondary" gutterBottom>
-                        {this.props.value.title}
+                        {this.state.title}
                     </Typography>
                     <CardContent>
                         <Typography component="p">
-                        {this.props.value.content}
+                        {this.state.content}
                             </Typography>
                     </CardContent>
                 </Card>

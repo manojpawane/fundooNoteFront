@@ -7,22 +7,28 @@ import { Grid } from '@material-ui/core';
 import EditCard from '../EditCard/EditCard';
 import Dialog from '@material-ui/core/Dialog';
 
+
+
 class CardNote extends Component{
   constructor(){
     super()
     this.state = {
       list:[],
       valueOf:'',
-      open:false
-    }
+      index:'',
+      open:false,
+      maxWidth:'xl'
+        }
+    this.onChange = this.onChange.bind(this)
   }
   state = {
     spacing: '16',
   };
 
-  handleClickOpen = (value) => {
+  handleClickOpen = (value, index) => {
     this.setState({ open: true });
     this.setState({valueOf:value})
+    this.setState({index:index})
   };
 
   handleClose = () => {
@@ -42,6 +48,12 @@ class CardNote extends Component{
       }
     })
   }
+
+  onChange=(val, index)=>{
+    let newList = this.state.list.slice();
+    newList[index] = val;
+    this.setState({list:newList})
+  }
  
 
     render(){
@@ -51,19 +63,20 @@ class CardNote extends Component{
            {this.state.list.map((value, index)=>(
            <Grid  key={value._id}>
           
-          {index % 3 === 0 ? <Grid  container direction="column" justify="center" alignItems="flex-start"><Grid onClick={() => this.handleClickOpen(value)} container direction="column" justify="center"><Card value={value}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid  container direction="column" justify="center" alignItems="center"><Grid onClick={() => this.handleClickOpen(value)} container direction="column"><Card value={value}/></Grid></Grid> 
-          :index % 3 === 2 ? <Grid  container direction="column" justify="center" alignItems="flex-end"><Grid onClick={() => this.handleClickOpen(value)} container direction="column"><Card value={value}/></Grid></Grid>
+          {index % 3 === 0 ? <Grid  container direction="column" justify="center" alignItems="flex-start"><Grid onClick={() => this.handleClickOpen(value, index)} container direction="column" justify="center"><Card value={value} index={index}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid  container direction="column" justify="center" alignItems="center"><Grid onClick={() => this.handleClickOpen(value, index)} container direction="column"><Card value={value} index={index}/></Grid></Grid> 
+          :index % 3 === 2 ? <Grid  container direction="column" justify="center" alignItems="flex-end"><Grid onClick={() => this.handleClickOpen(value, index)} container direction="column"><Card value={value} index={index}/></Grid></Grid>
           :''}
           </Grid>
         ))}
     </Grid>
     <Dialog
         open={this.state.open}
+        maxWidth={this.state.maxWidth}
         onClose={this.handleClose}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby="max-width-dialog-title"
             >
-            <EditCard value={this.state.valueOf} handleClose={this.handleClose}/>
+            <EditCard value={this.state.valueOf} index={this.state.index} handleClose={this.handleClose} onChange = {this.onChange}/>
       </Dialog>
     </div>
         )

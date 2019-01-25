@@ -28,6 +28,7 @@ export const  updateNotes =note =>{
         return res.data
     })
     .catch(err =>{
-        throw err
+        console.log(err);
+        
     })
 }

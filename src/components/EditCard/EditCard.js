@@ -5,7 +5,13 @@ import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { updateNotes } from '../../Database/Notes';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
+import TextField from '@material-ui/core/TextField';
+
+const cardStyle = {
+    width:'706px',
+    height:'214px'   
+   }
 
 class EditCard extends Component{
     constructor(props){
@@ -22,7 +28,7 @@ class EditCard extends Component{
             open:this.props.open
         }
         this.onChange = this.onChange.bind(this)
-         this.onSubmit = this.onSubmit.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
     
     onChange(e){
@@ -47,8 +53,7 @@ class EditCard extends Component{
 
         updateNotes(note).then(res => {
          if(res){
-             console.log('res '+res);
-             this.props.history.push('/dashboard');
+             this.props.onChange(note, this.props.index);
          }
         })
         .catch(err => {
@@ -63,18 +68,26 @@ class EditCard extends Component{
     
       render() {              
         return (
-          <div>
-              <form noValidate onSubmit={this.onSubmit}>
-              <DialogContent>
-              <h2><InputBase value={this.state.title} 
-              placeholder="Title" 
+          <div >
+              <form  noValidate onSubmit={this.onSubmit}>
+              <DialogContent style={cardStyle}>
+        <h2><InputBase
+              value={this.state.title} 
+              placeholder="Title"
               name = "title"
+              style={{width:'650px'}}
+              variant = "h1"
               onChange={this.onChange}
               /></h2>
-                <InputBase value={this.state.content}
+
+            <TextField
+                value={this.state.content}
                 name="content"
+                style = {{width:'650px'}}
+                multiline
                 onChange={this.onChange}
-                />
+            />
+              
               </DialogContent>
               <DialogActions>
                 <Button type="submit" onClick={this.props.handleClose} color="primary">
