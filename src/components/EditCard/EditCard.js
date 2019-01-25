@@ -70,7 +70,7 @@ class EditCard extends Component{
         return (
           <div >
               <form  noValidate onSubmit={this.onSubmit}>
-              <DialogContent style={cardStyle}>
+              <DialogContent >
         <h2><InputBase
               value={this.state.title} 
               placeholder="Title"
@@ -81,9 +81,9 @@ class EditCard extends Component{
               /></h2>
 
             <TextField
+                style={cardStyle}
                 value={this.state.content}
                 name="content"
-                style = {{width:'650px'}}
                 multiline
                 onChange={this.onChange}
             />
