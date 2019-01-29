@@ -8,8 +8,15 @@ import EditCard from '../EditCard/EditCard';
 import Dialog from '@material-ui/core/Dialog';
 
 
-
+const cardStyl = {
+  maxWidth:'213px',
+  display: 'block',
+  width: '30vw',
+  transitionDuration: '0.3s',
+  height: 'auto'
+}
 class CardNote extends Component{
+  
   constructor(){
     super()
     this.state = {
@@ -59,13 +66,13 @@ class CardNote extends Component{
     render(){
         return(        
         <div>
-           <Grid container direction="row" justify="center" alignItems="center" spacing={Number(8)}>
+           <Grid style={cardStyl} container direction="row" justify="center" spacing={Number(8)}>
            {this.state.list.map((value, index)=>(
-           <Grid  key={value._id}>
+           <Grid  direction="column" key={value._id}>
           
-          {index % 3 === 0 ? <Grid  container direction="column" justify="center" alignItems="flex-start"><Grid onClick={() => this.handleClickOpen(value, index)} container direction="column" justify="center"><Card value={value} index={index}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid  container direction="column" justify="center" alignItems="center"><Grid onClick={() => this.handleClickOpen(value, index)} container direction="column"><Card value={value} index={index}/></Grid></Grid> 
-          :index % 3 === 2 ? <Grid  container direction="column" justify="center" alignItems="flex-end"><Grid onClick={() => this.handleClickOpen(value, index)} container direction="column"><Card value={value} index={index}/></Grid></Grid>
+          {index % 3 === 0 ? <Grid container className={'flexGrow: 2'} spacing={4}><Grid item xs={10} spacing={16} container direction="column"  onClick={() => this.handleClickOpen(value, index)}  className=""><Card value={value} index={index}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container className={'flexGrow: 2'} spacing={4}><Grid item xs={10} spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)} className=""><Card value={value} index={index}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container className={'flexGrow: 2'} spacing={4}><Grid item xs={10} spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)}><Card value={value} index={index} /></Grid></Grid>
           :''}
           </Grid>
         ))}

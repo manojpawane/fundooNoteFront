@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
+import Paper from 'material-ui/core/Paper'
 
 const styles = {
     card: {
@@ -50,16 +51,14 @@ class CardNote extends Component{
     render(){
         return(
             <div>
-                <Card style={cardStyle}>
+                <Paper style={cardStyle}>
                     <Typography variant="h5" style={cardTitle} component="h2" color="textSecondary" gutterBottom>
                         {this.state.title}
                     </Typography>
-                    <CardContent>
                         <Typography component="p">
                         {this.state.content}
-                            </Typography>
-                    </CardContent>
-                </Card>
+                    </Typography>
+                </Paper>
             </div>
         )
     }
