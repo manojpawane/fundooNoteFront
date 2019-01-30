@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { updateNotes } from '../../Database/Notes';
 import jwt_decode from 'jwt-decode';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 const cardStyle = {
     width:'598px',
@@ -104,6 +105,7 @@ class EditCard extends Component{
           </div>
              
               <DialogActions>
+              <DeleteOutlinedIcon />
                 <Button type="submit" style={{postion:'fixed'}} onClick={this.onSubmit} color="primary">
                   Close
                 </Button>

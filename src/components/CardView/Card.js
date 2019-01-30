@@ -5,6 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
 import CardActionArea from '@material-ui/core/CardActionArea';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
 
 const styles = {
     card: {
@@ -32,7 +34,8 @@ class CardNote extends Component{
         super(props)
         this.state ={
             title:this.props.value.title,
-            content:this.props.value.content
+            content:this.props.value.content,
+            id:this.props.value._id
         }
     }
     componentDidUpdate(prevProps){
@@ -58,7 +61,10 @@ class CardNote extends Component{
           </Typography>
         </CardContent>
       </CardActionArea>
-                </Card>
+      <div>
+      <DeleteOutlinedIcon onClick = {this.props.deleteNoteById} value = {this.state.id}/>
+      </div>
+         </Card>
             </div>
         )
     }

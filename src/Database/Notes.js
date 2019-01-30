@@ -32,3 +32,15 @@ export const  updateNotes =note =>{
         
     })
 }
+
+export const deleteNote = note =>{
+    return axios.delete('note/delete/' +note._id)
+    .then(
+        res =>{
+            return res.data     
+        }
+    )
+    .catch(err =>{
+        throw err;
+    })
+}

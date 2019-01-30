@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import Card from '../CardView/Card'
-import { getNotes} from '../../Database/Notes'
+import { getNotes, deleteNote} from '../../Database/Notes'
 import jwt_decode from 'jwt-decode'
 import { Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import EditCard from '../EditCard/EditCard';
@@ -38,16 +38,33 @@ class CardNote extends Component{
       maxWidth:'xl'
         }
     this.onChange = this.onChange.bind(this)
+    this.deleteNoteById = this.deleteNoteById.bind(this)
   }
   state = {
     spacing: '16',
   };
+
+
 
   handleClickOpen = (value, index) => {
     this.setState({ open: true });
     this.setState({valueOf:value})
     this.setState({index:index})
   };
+
+  deleteNoteById = (value) =>{
+      const note = {
+        id:this.value._id
+      }
+          deleteNote(note).then(res =>{
+            if(res){
+              console.log(res);
+            }
+          })
+          .catch(err =>{
+            console.log(err);
+          })
+  }
 
   handleClose = () => {
     this.setState({ open: false });
@@ -71,6 +88,7 @@ class CardNote extends Component{
     let newList = this.state.list.slice();
     newList[index] = val;
     this.setState({list:newList})
+    console.log('tested')
   }
  
 
@@ -83,7 +101,7 @@ class CardNote extends Component{
           
           {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"  onClick={() => this.handleClickOpen(value, index)}  className=""><Card value={value} index={index}/></Grid></Grid>
           :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)} className=""><Card value={value} index={index}/></Grid> </Grid>
-          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)}><Card value={value} index={index} /></Grid></Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)}><Card value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
           :''}
           </div>
         ))}
