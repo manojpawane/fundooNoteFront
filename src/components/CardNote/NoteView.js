@@ -3,11 +3,22 @@ import { withRouter } from 'react-router-dom'
 import Card from '../CardView/Card'
 import { getNotes} from '../../Database/Notes'
 import jwt_decode from 'jwt-decode'
-import { Grid } from '@material-ui/core';
+import { Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import EditCard from '../EditCard/EditCard';
 import Dialog from '@material-ui/core/Dialog';
 
-
+const theme = createMuiTheme({
+  overrides: {
+    MuiDialogContent : {
+      root: {
+      overflowX: 'hidden'
+    }
+  }
+  },
+  typography: {
+    useNextVariants: true,
+  }
+})
 const cardStyl = {
   maxWidth:'213px',
   display: 'block',
@@ -65,7 +76,7 @@ class CardNote extends Component{
 
     render(){
         return(        
-        <div>
+        <div style={{cardStyl}}>
            <Grid  container direction="row" justify="center" alignItems="center" spacing={8}>
            {this.state.list.map((value, index)=>(
            <div key={value._id}>
@@ -77,6 +88,8 @@ class CardNote extends Component{
           </div>
         ))}
     </Grid>
+
+    <MuiThemeProvider theme={theme}>
     <Dialog
         open={this.state.open}
         maxWidth={this.state.maxWidth}
@@ -85,6 +98,7 @@ class CardNote extends Component{
             >
             <EditCard value={this.state.valueOf} index={this.state.index} handleClose={this.handleClose} onChange = {this.onChange}/>
       </Dialog>
+      </MuiThemeProvider>
     </div>
         )
     }

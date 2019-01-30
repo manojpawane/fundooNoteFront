@@ -16,7 +16,7 @@ const cardStyle = {
        width:'566px',
        height:'auto',       
        borderBottomColor: 'transparent',
-       
+       overflowX:'hidden'
    }
 
    const titleStyle = {
