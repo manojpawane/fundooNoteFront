@@ -6,11 +6,23 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { updateNotes } from '../../Database/Notes';
 import jwt_decode from 'jwt-decode';
-import TextField from '@material-ui/core/TextField';
 
 const cardStyle = {
-    width:'706px',
-    height:'214px'   
+    width:'598px',
+     height:'auto',
+   }
+
+   const contentStyle = {
+       width:'566px',
+       height:'auto',       
+       borderBottomColor: 'transparent',
+       
+   }
+
+   const titleStyle = {
+       height:'28px',
+       width:'568px',
+       postion:'fixed'
    }
 
 class EditCard extends Component{
@@ -59,7 +71,7 @@ class EditCard extends Component{
         .catch(err => {
             console.log(err);
         })
-
+        this.props.handleClose();
     }
 
       handleClickOpen = () => {
@@ -68,34 +80,36 @@ class EditCard extends Component{
     
       render() {              
         return (
-          <div >
-              <form  noValidate onSubmit={this.onSubmit}>
+            
+           <div >
+              <div style={cardStyle}>
               <DialogContent >
-        <h2><InputBase
+                      <InputBase
               value={this.state.title} 
               placeholder="Title"
               name = "title"
-              style={{width:'650px'}}
+              style={titleStyle}
               variant = "h1"
               onChange={this.onChange}
-              /></h2>
+              />
 
-            <TextField
-                style={cardStyle}
-                value={this.state.content}
-                name="content"
-                multiline
-                onChange={this.onChange}
+            <InputBase 
+            style={contentStyle}
+            value={this.state.content}
+            name="content"
+            multiline
+            onChange={this.onChange}
             />
-              
-              </DialogContent>
+             </DialogContent>
+          </div>
+             
               <DialogActions>
-                <Button type="submit" onClick={this.props.handleClose} color="primary">
+                <Button type="submit" style={{postion:'fixed'}} onClick={this.onSubmit} color="primary">
                   Close
                 </Button>
               </DialogActions>
-              </form>
           </div>
+          
         );
       }}
 

@@ -66,15 +66,15 @@ class CardNote extends Component{
     render(){
         return(        
         <div>
-           <Grid style={cardStyl} container direction="row" justify="center" spacing={Number(8)}>
+           <Grid  container direction="row" justify="center" alignItems="center" spacing={8}>
            {this.state.list.map((value, index)=>(
-           <Grid  direction="column" key={value._id}>
+           <div key={value._id}>
           
-          {index % 3 === 0 ? <Grid container className={'flexGrow: 2'} spacing={4}><Grid item xs={10} spacing={16} container direction="column"  onClick={() => this.handleClickOpen(value, index)}  className=""><Card value={value} index={index}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid container className={'flexGrow: 2'} spacing={4}><Grid item xs={10} spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)} className=""><Card value={value} index={index}/></Grid> </Grid>
-          :index % 3 === 2 ? <Grid container className={'flexGrow: 2'} spacing={4}><Grid item xs={10} spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)}><Card value={value} index={index} /></Grid></Grid>
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"  onClick={() => this.handleClickOpen(value, index)}  className=""><Card value={value} index={index}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)} className=""><Card value={value} index={index}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)}><Card value={value} index={index} /></Grid></Grid>
           :''}
-          </Grid>
+          </div>
         ))}
     </Grid>
     <Dialog

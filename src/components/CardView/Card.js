@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
-import Paper from 'material-ui/core/Paper'
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 const styles = {
     card: {
@@ -27,11 +27,6 @@ const cardStyle = {
     maxWidth:'213px'
 }
 
-const cardTitle = {
-    paddingLeft:'15px',
-    paddingTop:'8px'
-}
-
 class CardNote extends Component{
     constructor(props){
         super(props)
@@ -51,14 +46,19 @@ class CardNote extends Component{
     render(){
         return(
             <div>
-                <Paper style={cardStyle}>
-                    <Typography variant="h5" style={cardTitle} component="h2" color="textSecondary" gutterBottom>
-                        {this.state.title}
-                    </Typography>
-                        <Typography component="p">
-                        {this.state.content}
-                    </Typography>
-                </Paper>
+                <Card style={cardStyle}>
+                    <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+          {this.state.title}
+          </Typography>
+          <Typography component="p">
+          {this.state.content}
+
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+                </Card>
             </div>
         )
     }
