@@ -65,7 +65,8 @@ class CardNote extends Component{
         </CardContent>
       </CardActionArea>
       <div>
-          <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/>
+          <DeleteOutlinedIcon />
+          {/* <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/> */}
       </div>
          </Card>
             </div>
