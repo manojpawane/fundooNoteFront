@@ -40,6 +40,9 @@ class CardNote extends Component{
     }
     componentDidUpdate(prevProps){
         if(prevProps.value!==this.props.value){
+            console.log(prevProps);
+            console.log(this.props);
+            
             this.setState({
                 title:this.props.value.title,
                 content:this.props.value.content
@@ -55,14 +58,14 @@ class CardNote extends Component{
           <Typography gutterBottom variant="h5" component="h2">
           {this.state.title}
           </Typography>
-          <Typography component="p">
+          <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
 
           </Typography>
         </CardContent>
       </CardActionArea>
       <div>
-      <DeleteOutlinedIcon onClick = {this.props.deleteNoteById} value = {this.state.id}/>
+          <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/>
       </div>
          </Card>
             </div>

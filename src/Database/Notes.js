@@ -1,8 +1,6 @@
 import axios from 'axios'
 
 export const  getNotes = userId =>{
-    console.log('test'+userId);
-    
     return axios.get('note/getNote/' + userId)
     .then(res =>{
         return res.data
@@ -34,7 +32,7 @@ export const  updateNotes =note =>{
 }
 
 export const deleteNote = note =>{
-    return axios.delete('note/delete/' +note._id)
+    return axios.delete('note/deleteNote/' +note.id)
     .then(
         res =>{
             return res.data     

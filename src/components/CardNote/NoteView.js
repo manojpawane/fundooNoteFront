@@ -39,6 +39,7 @@ class CardNote extends Component{
         }
     this.onChange = this.onChange.bind(this)
     this.deleteNoteById = this.deleteNoteById.bind(this)
+    this.handleClickOpen = this.handleClickOpen.bind(this);
   }
   state = {
     spacing: '16',
@@ -52,14 +53,19 @@ class CardNote extends Component{
     this.setState({index:index})
   };
 
-  deleteNoteById = (value) =>{
+  deleteNoteById = (value, index) =>{
       const note = {
-        id:this.value._id
+        id:value._id
       }
+      console.log(this.state.list);
           deleteNote(note).then(res =>{
             if(res){
-              console.log(res);
+              this.setState(prevState =>({
+                list:prevState.list.filter(value => value !== this.state.list[index])
+              }))
             }
+            console.log(this.state.list);
+            
           })
           .catch(err =>{
             console.log(err);
@@ -76,7 +82,6 @@ class CardNote extends Component{
     
     getNotes(decoded._id).then(res =>{
       if(res){
-        console.log(res)
         this.setState({
           list:res
         })
@@ -99,9 +104,9 @@ class CardNote extends Component{
            {this.state.list.map((value, index)=>(
            <div key={value._id}>
           
-          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"  onClick={() => this.handleClickOpen(value, index)}  className=""><Card value={value} index={index}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)} className=""><Card value={value} index={index}/></Grid> </Grid>
-          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" onClick={() => this.handleClickOpen(value, index)}><Card value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
           :''}
           </div>
         ))}
@@ -122,4 +127,4 @@ class CardNote extends Component{
     }
 }
 
-export default withRouter(CardNote)
+export default withRouter(CardNote) 
