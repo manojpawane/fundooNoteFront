@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
-import CardActionArea from '@material-ui/core/CardActionArea';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 
@@ -53,19 +52,21 @@ class CardNote extends Component{
         return(
             <div>
                 <Card style={cardStyle}>
-                    <CardActionArea>
+    
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.title}
+          <img style={{display: 'flex', justifyContent: 'flex-end'}} alt="pinned" src={require('../../Assests/images/pinned.svg')}  />
           </Typography>
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
 
           </Typography>
         </CardContent>
-      </CardActionArea>
+    
       <div>
           {/* <DeleteOutlinedIcon /> */}
+          <img alt="archive" src={require('../../Assests/images/archive.svg')}  />
           <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/>
       </div>
          </Card>
