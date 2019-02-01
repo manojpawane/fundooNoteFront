@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode'
 import { Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import EditCard from '../EditCard/EditCard';
 import Dialog from '@material-ui/core/Dialog';
+import AddNote from '../CardView/AddNote'
 
 const theme = createMuiTheme({
   overrides: {
@@ -40,6 +41,7 @@ class CardNote extends Component{
     this.onChange = this.onChange.bind(this)
     this.deleteNoteById = this.deleteNoteById.bind(this)
     this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleAddList = this.handleAddList.bind(this);
   }
   state = {
     spacing: '16',
@@ -86,6 +88,7 @@ class CardNote extends Component{
           list:res
         })
       }
+      console.log(this.state.list)
     })
   }
 
@@ -96,20 +99,42 @@ class CardNote extends Component{
     console.log('tested')
   }
  
+  handleAddList = (newItem) =>{
+    let newList = this.state.list
+    newList.push(newItem);
+    this.setState({list:newList})
+  }
 
     render(){
         return(        
+          <div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <AddNote  handleAddList = {this.handleAddList}/>
+            </div>
         <div style={{cardStyl}}>
-           <Grid  container direction="row" justify="center" alignItems="center" spacing={8}>
+           <Grid  container direction="row" justify="center" alignItems="center">
            {this.state.list.map((value, index)=>(
+             
            <div key={value._id}>
-          
-          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid> </Grid>
-          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid  spacing={16} container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
+          {value.isPinned === true  && value.noteType === "isNote" ? <div>
+            <p>PINNED</p>
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
           :''}
+          </div> : ''}
+
+          {value.isPinned === false  && value.noteType === 'isNote' ? <div>
+            <p>OTHERS</p>
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item xs zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById}/></Grid></Grid>
+          :''}
+          </div> : ''}
           </div>
-        ))}
+        )
+        
+        )}
     </Grid>
 
     <MuiThemeProvider theme={theme}>
@@ -122,6 +147,7 @@ class CardNote extends Component{
             <EditCard value={this.state.valueOf} index={this.state.index} handleClose={this.handleClose} onChange = {this.onChange}/>
       </Dialog>
       </MuiThemeProvider>
+    </div>
     </div>
         )
     }

@@ -26,7 +26,7 @@ const styles = {
 };
 
 const cardStyle = {
-    maxWidth:'213px'
+    width:'213px'
 }
 
 class CardNote extends Component{
@@ -55,7 +55,7 @@ class CardNote extends Component{
                 <Card style={cardStyle}>
                     <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.title}
           </Typography>
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
@@ -65,8 +65,8 @@ class CardNote extends Component{
         </CardContent>
       </CardActionArea>
       <div>
-          <DeleteOutlinedIcon />
-          {/* <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/> */}
+          {/* <DeleteOutlinedIcon /> */}
+          <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/>
       </div>
          </Card>
             </div>

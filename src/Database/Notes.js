@@ -31,6 +31,28 @@ export const  updateNotes =note =>{
     })
 }
 
+export const  addNotes =note =>{
+    return axios.post('note/createNote',{
+        title: note.title,
+        content: note.content,
+        noteType: note.noteType,
+        isPinned:note.isPinned,
+        userId:note.userId,
+        color:note.color,
+        label:note.label,
+        photo:note.photo,
+        reminder:note.reminder
+    })
+    .then(res =>{
+        return res.data
+    })
+    .catch(err =>{
+        console.log(err);
+        
+    })
+}
+
+
 export const deleteNote = note =>{
     return axios.delete('note/deleteNote/' +note.id)
     .then(
