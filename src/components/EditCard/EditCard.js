@@ -73,6 +73,7 @@ class EditCard extends Component{
             console.log(err);
         })
         this.props.handleClose();
+        this.props.noteTypeToPrint();
     }
 
       handleClickOpen = () => {

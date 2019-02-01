@@ -77,6 +77,7 @@ class AddNote extends Component{
                .catch(err => {
                    console.log(err);
                })
+               this.props.noteTypeToPrint();
         }
         
            this.closeNoteForContent();
