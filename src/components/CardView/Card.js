@@ -24,9 +24,7 @@ const styles = {
     },
 };
 
-const cardStyle = {
-    width:'213px'
-}
+
 
 class CardNote extends Component{
     constructor(props){
@@ -34,24 +32,23 @@ class CardNote extends Component{
         this.state ={
             title:this.props.value.title,
             content:this.props.value.content,
-            id:this.props.value._id
+            id:this.props.value._id,
+            viewPx:this.props.viewVal
         }
     }
     componentDidUpdate(prevProps){
-        if(prevProps.value!==this.props.value){
-            console.log(prevProps.value);
-            console.log(this.props.value);
-            
+        if(prevProps!==this.props){
             this.setState({
                 title:this.props.value.title,
-                content:this.props.value.content
+                content:this.props.value.content,
+                viewPx:this.props.viewVal
             })
         }
     }
     render(){
         return(
             <div>
-                <Card style={cardStyle}>
+                <Card style={{width:this.state.viewPx}}>
     
         <CardContent>
         <div className="d-flex justify-content-between">
@@ -61,7 +58,6 @@ class CardNote extends Component{
         </div>
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
-
           </Typography>
         </CardContent>
 

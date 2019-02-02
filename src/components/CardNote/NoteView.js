@@ -32,8 +32,8 @@ const cardStyl = {
 }
 class CardNote extends Component{
   
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       list:[],
       valueOf:'',
@@ -41,7 +41,8 @@ class CardNote extends Component{
       open:false,
       maxWidth:'xl',
       pinnedNote:'',
-      otherNote:''
+      otherNote:'',
+      viewVal:this.props.view
         }
     this.onChange = this.onChange.bind(this)
     this.deleteNoteById = this.deleteNoteById.bind(this)
@@ -61,6 +62,12 @@ class CardNote extends Component{
     this.setState({valueOf:value})
     this.setState({index:index})
   };
+
+  componentDidUpdate(prevProps){
+    if(prevProps !== this.props){
+      this.setState({viewVal:this.props.view})
+    }
+  }
 
   deleteNoteById = (value, index) =>{
       const note = {
@@ -185,9 +192,9 @@ class CardNote extends Component{
            <div key={value._id}>
           {value.isPinned === true  && value.noteType === "isNote" ? <div>
           
-          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint}/></Grid> </Grid>
-          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint}/></Grid></Grid>
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal}/></Grid></Grid>
           :''}
           </div> : ''}
 
@@ -206,9 +213,9 @@ class CardNote extends Component{
  
           {value.isPinned === false  && value.noteType === 'isNote' ? <div>
           
-          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item md zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint}/></Grid></Grid>
-          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item md zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint}/></Grid> </Grid>
-          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item md zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint}/></Grid></Grid>
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item md zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item md zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item md zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal}/></Grid></Grid>
           :''}
           </div> : ''}
           </div>

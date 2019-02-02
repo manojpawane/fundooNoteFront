@@ -152,14 +152,29 @@ sectionDesktop: {
 });
 
 class MiniDrawer extends React.Component {
-  state = {
-    open: false,
-    anchorEl: null,
-  };
-
+  
+constructor(props){
+super(props)
+this.state = {
+  open: false,
+  anchorEl: null,
+  view:'615px'
+}
+this.viewValue = this.viewValue.bind(this);
+}
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
+
+  viewValue = () =>{
+    if(this.state.view === '213px'){
+      this.setState({view:'615px'})
+    }
+    else{
+      this.setState({view:'213px'})
+    }
+    
+  }
 
   handleDrawerClose = () => {
     this.setState({ open: false });
@@ -231,12 +246,17 @@ handleMenuClose = () => {
                         </div>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
+                        <div onClick={this.viewValue} style={{marginTop: '20px'}}>
+                       {this.state.view === '213px'? <img  alt="unpinned" src={require('../../Assests/images/list.svg')}  />     
+                        : <img alt="unpinned" src={require('../../Assests/images/grid.svg')}  /> }
+                        </div>
                             <IconButton
                                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                                 aria-haspopup="true"
                                 onClick={this.handleProfileMenuOpen}
                                 color="inherit"
                             >
+
                         <Avatar alt="Remy Sharp" src={require('../../Assests/images/ironman.jpg')} className={classes.bigAvatar} />
                         </IconButton>
                         </div>
@@ -283,7 +303,7 @@ handleMenuClose = () => {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <CardNote/>
+          <CardNote view={this.state.view}/>
         </main>
       </div>
     );
