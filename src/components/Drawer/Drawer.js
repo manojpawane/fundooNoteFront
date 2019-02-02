@@ -246,7 +246,7 @@ handleMenuClose = () => {
                         </div>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
-                        <div onClick={this.viewValue} style={{marginTop: '20px'}}>
+                        <div onClick={this.viewValue} style={{marginTop: '20px', cursor:'pointer'}}>
                        {this.state.view === '213px'? <img  alt="unpinned" src={require('../../Assests/images/list.svg')}  />     
                         : <img alt="unpinned" src={require('../../Assests/images/grid.svg')}  /> }
                         </div>
