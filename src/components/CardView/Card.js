@@ -39,8 +39,8 @@ class CardNote extends Component{
     }
     componentDidUpdate(prevProps){
         if(prevProps.value!==this.props.value){
-            console.log(prevProps);
-            console.log(this.props);
+            console.log(prevProps.value);
+            console.log(this.props.value);
             
             this.setState({
                 title:this.props.value.title,
@@ -54,19 +54,22 @@ class CardNote extends Component{
                 <Card style={cardStyle}>
     
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
-          {this.state.title}
-          <img style={{display: 'flex', justifyContent: 'flex-end'}} alt="pinned" src={require('../../Assests/images/pinned.svg')}  />
-          </Typography>
+        <div className="d-flex justify-content-between">
+            <div className="p-2 col-example text-left"><h5 onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>{this.state.title}</h5></div>
+            { this.props.value.isPinned === false ? <div className="p-2 col-example text-left"><img alt="pinned" src={require('../../Assests/images/pinned.svg')}  /></div>:
+            <div className="p-2 col-example text-left"><img alt="unpinned" src={require('../../Assests/images/unpinned.svg')}  /></div>}
+        </div>
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
 
           </Typography>
         </CardContent>
-    
+
+
       <div>
           {/* <DeleteOutlinedIcon /> */}
-          <img alt="archive" src={require('../../Assests/images/archive.svg')}  />
+          {this.props.value.noteType === 'isArchive' ? <img alt="archive" src={require('../../Assests/images/unarchive.svg')}  />
+          : <img alt="archive" src={require('../../Assests/images/archive.svg')}  />}
           <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/>
       </div>
          </Card>

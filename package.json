@@ -10,6 +10,7 @@
     "bootstrap": "^4.1.3",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
+    "node-sass": "^4.11.0",
     "react-dom": "^16.6.3",
     "react-flex-material": "^1.1.0",
     "react-redux": "^6.0.0",

@@ -7,6 +7,7 @@ import { Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import EditCard from '../EditCard/EditCard';
 import Dialog from '@material-ui/core/Dialog';
 import AddNote from '../CardView/AddNote'
+import { updateNotes } from '../../Database/Notes';
 
 const theme = createMuiTheme({
   overrides: {
@@ -47,6 +48,7 @@ class CardNote extends Component{
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleAddList = this.handleAddList.bind(this);
     this.noteTypeToPrint = this.noteTypeToPrint.bind(this);
+    this.onUpdateSubmit = this.onUpdateSubmit.bind(this);
   }
   state = {
     spacing: '16',
@@ -142,6 +144,31 @@ class CardNote extends Component{
     this.noteTypeToPrint()
   }
 
+  onUpdateSubmit = (updateValue, index) => {
+    
+    const note = {
+        title: updateValue.title,
+        content: updateValue.content,
+        noteType: updateValue.noteType,
+        _id:updateValue._id,
+        isPinned:updateValue.isPinned,
+        userId:updateValue._id,
+        color:updateValue.color,
+        label:updateValue.label,
+        photo:updateValue.photo,
+        reminder:updateValue.reminder
+    }
+
+    updateNotes(note).then(res => {
+     if(res){
+         this.onChange(res, index);
+     }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
     render(){
         return(        
           <div>
@@ -197,7 +224,7 @@ class CardNote extends Component{
         onClose={this.handleClose}
         aria-labelledby="max-width-dialog-title"
             >
-            <EditCard value={this.state.valueOf} noteTypeToPrint= {this.noteTypeToPrint} index={this.state.index} handleClose={this.handleClose} onChange = {this.onChange}/>
+            <EditCard value={this.state.valueOf} noteTypeToPrint= {this.noteTypeToPrint} onUpdateSubmit = {this.onUpdateSubmit} index={this.state.index} handleClose={this.handleClose} onChange = {this.onChange}/>
       </Dialog>
       </MuiThemeProvider>
     </div>

@@ -4,7 +4,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { updateNotes } from '../../Database/Notes';
 import jwt_decode from 'jwt-decode';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
@@ -64,16 +63,10 @@ class EditCard extends Component{
             label:this.state.label
         }
 
-        updateNotes(note).then(res => {
-         if(res){
-             this.props.onChange(note, this.props.index);
-         }
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        this.props.onUpdateSubmit(note, this.props.index);
         this.props.handleClose();
         this.props.noteTypeToPrint();
+
     }
 
       handleClickOpen = () => {
