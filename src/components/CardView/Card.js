@@ -71,6 +71,34 @@ class CardNote extends Component{
         this.props.onUpdateSubmit(note, this.props.index);
     }
 
+    onSubmitNoteType =async (e, isType)=>{
+        e.preventDefault();
+        
+        const token = localStorage.usertoken
+        const decoded =await jwt_decode(token);
+        if(isType === 'archive'){
+           await this.setState({noteType:'isArchive'})
+        }
+        else if(isType === 'trash'){
+          await this.setState({noteType:'isTrashed'})
+        }
+
+        const note = {
+            title: this.state.title,
+            content: this.state.content,
+            noteType: this.state.noteType,
+            _id:this.state._id,
+            isPinned:this.state.isPinned,
+            userId:decoded._id,
+            color:this.state.color,
+            label:this.state.label,
+            photo:this.state.photo,
+            reminder:this.state.reminder
+        }
+
+        this.props.onUpdateSubmit(note, this.props.index);
+    }
+
     componentDidUpdate(prevProps){
         if(prevProps!==this.props){
             this.setState({
@@ -97,11 +125,12 @@ class CardNote extends Component{
         </CardContent>
 
 
-      <div>
-          {/* <DeleteOutlinedIcon /> */}
-          {this.props.value.noteType === 'isArchive' ? <img alt="archive" src={require('../../Assests/images/unarchive.svg')}  />
-          : <img alt="archive" src={require('../../Assests/images/archive.svg')}  />}
-          <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/>
+      <div >
+          
+          {this.props.value.noteType === 'isArchive' ? <img alt="unArchive" src={require('../../Assests/images/unarchive.svg')}  />
+          : <img alt="archive" onClick ={(event)=> {this.onSubmitNoteType(event,'archive')}} src={require('../../Assests/images/archive.svg')}  />}
+          {/* <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/> */}
+          <DeleteOutlinedIcon onClick ={(event) => {this.onSubmitNoteType(event,'trash')}} />
       </div>
          </Card>
             </div>
