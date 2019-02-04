@@ -11,7 +11,6 @@ export const  getNotes = userId =>{
 }
 
 export const  updateNotes =note =>{
-    console.log('test: '+note._id);
     return axios.post('note/updateNote',{
         title: note.title,
         content: note.content,

@@ -158,7 +158,7 @@ super(props)
 this.state = {
   open: false,
   anchorEl: null,
-  view:'615px'
+  view:'213px'
 }
 this.viewValue = this.viewValue.bind(this);
 }
