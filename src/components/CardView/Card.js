@@ -53,6 +53,7 @@ class CardNote extends Component{
         }
         else{
           await this.setState({isPinned:true})
+          await this.setState({noteType:'isNote'})
         }
 
         const note = {
@@ -78,9 +79,14 @@ class CardNote extends Component{
         const decoded =await jwt_decode(token);
         if(isType === 'archive'){
            await this.setState({noteType:'isArchive'})
+           await this.setState({isPinned:false})
         }
         else if(isType === 'trash'){
           await this.setState({noteType:'isTrashed'})
+          await this.setState({isPinned:false})
+        }
+        else if(isType === 'unArchive' || isType === 'restore'){
+            await this.setState({noteType:'isNote'})
         }
 
         const note = {
@@ -116,8 +122,10 @@ class CardNote extends Component{
         <CardContent>
         <div className="d-flex justify-content-between">
             <div className="p-2 col-example text-left"><h5 onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>{this.state.title}</h5></div>
+            {this.props.value.noteType === 'isNote' ? <div >
             { this.props.value.isPinned === false ? <div style={{cursor:'pointer'}} className="p-2 col-example text-left"><img alt="pinned" onClick={this.onSubmitPinned} src={require('../../Assests/images/pinned.svg')}  /></div>:
             <div style={{cursor:'pointer'}} className="p-2 col-example text-left"><img alt="unpinned" onClick={this.onSubmitPinned} src={require('../../Assests/images/unpinned.svg')}  /></div>}
+        </div> : ''}
         </div>
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
@@ -127,10 +135,12 @@ class CardNote extends Component{
 
       <div >
           
-          {this.props.value.noteType === 'isArchive' ? <img alt="unArchive" src={require('../../Assests/images/unarchive.svg')}  />
-          : <img alt="archive" onClick ={(event)=> {this.onSubmitNoteType(event,'archive')}} src={require('../../Assests/images/archive.svg')}  />}
-          {/* <DeleteOutlinedIcon onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)}/> */}
-          <DeleteOutlinedIcon onClick ={(event) => {this.onSubmitNoteType(event,'trash')}} />
+          {this.props.value.noteType === 'isArchive' ? <img alt="unArchive" onClick ={(event)=> {this.onSubmitNoteType(event,'unArchive')}} src={require('../../Assests/images/unarchive.svg')}  />
+          : this.props.value.noteType !== 'isTrashed' ? <img alt="archive" onClick ={(event)=> {this.onSubmitNoteType(event,'archive')}} src={require('../../Assests/images/archive.svg')}  /> : ''}
+          {this.props.value.noteType === 'isTrashed' ? <img alt="deleteForever" onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)} src={require('../../Assests/images/deleteForever.svg')}  />
+          : <DeleteOutlinedIcon onClick ={(event) => {this.onSubmitNoteType(event,'trash')}} />  }
+                    {this.props.value.noteType === 'isTrashed' ? <img alt="restoreFromTrash" onClick ={(event) => {this.onSubmitNoteType(event,'restore')}} src={require('../../Assests/images/restoreFromTrash.svg')}  />
+          : ''  }
       </div>
          </Card>
             </div>

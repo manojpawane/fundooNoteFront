@@ -42,7 +42,8 @@ class CardNote extends Component{
       maxWidth:'xl',
       pinnedNote:'',
       otherNote:'',
-      viewVal:this.props.view
+      viewVal:this.props.view,
+      typeOfNote:this.props.typeOfNote
         }
     this.onChange = this.onChange.bind(this)
     this.deleteNoteById = this.deleteNoteById.bind(this)
@@ -66,6 +67,7 @@ class CardNote extends Component{
   componentDidUpdate(prevProps){
     if(prevProps !== this.props){
       this.setState({viewVal:this.props.view})
+      this.setState({typeOfNote:this.props.typeOfNote})
     }
   }
 
@@ -105,7 +107,6 @@ class CardNote extends Component{
         })
       }
       this.noteTypeToPrint();
-      console.log(this.state.list)
     })
   }
 
@@ -178,14 +179,17 @@ class CardNote extends Component{
     render(){
         return(        
           <div>
+            { this.state.typeOfNote === 'Keep' ?
             <div style={{display: 'flex', justifyContent: 'center'}}>
             <AddNote noteTypeToPrint= {this.noteTypeToPrint} handleAddList = {this.handleAddList}/>
-            </div>
+            </div> : ''}
         <div style={{cardStyl}}>
         
-        <p style={{marginLeft:'73px'}}>{this.state.pinnedNote}</p>
-        
-           <Grid  container direction="row" justify="center" alignItems="center">
+        {/* Render Note view for notes */}
+        { this.state.typeOfNote === 'Keep' ?
+        <div>
+        <p style={{marginLeft:'73px'}}>{this.state.pinnedNote}</p>  
+    <Grid  container direction="row" justify="center" alignItems="center">
            
            {this.state.list.map((value, index)=>(             
            <div key={value._id}>
@@ -222,6 +226,50 @@ class CardNote extends Component{
         
         )}
     </Grid>
+      </div>  :''}
+
+      {/* Render archive view */}
+      {this.state.typeOfNote === 'Archive' ? <div>
+      <Grid  container direction="row" justify="center" alignItems="center">
+           
+           {this.state.list.map((value, index)=>(             
+           <div key={value._id}>
+          {value.noteType === "isArchive" ? <div>
+          
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal} onUpdateSubmit={this.onUpdateSubmit}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal} onUpdateSubmit={this.onUpdateSubmit}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal} onUpdateSubmit={this.onUpdateSubmit}/></Grid></Grid>
+          :''}
+          </div> : ''}
+
+          </div>
+        )
+        
+        )}
+    </Grid>
+      </div> : ''}
+
+ 
+      {/* Render trash view */}
+      {this.state.typeOfNote === 'Trash' ? <div>
+      <Grid  container direction="row" justify="center" alignItems="center">
+           
+           {this.state.list.map((value, index)=>(             
+           <div key={value._id}>
+          {value.noteType === "isTrashed" ? <div>
+          
+          {index % 3 === 0 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column" className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal} onUpdateSubmit={this.onUpdateSubmit}/></Grid></Grid>
+          :index % 3 === 1 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"  className=""><Card handleClickOpen = {this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal} onUpdateSubmit={this.onUpdateSubmit}/></Grid> </Grid>
+          :index % 3 === 2 ? <Grid container direction="row" className={'flexGrow: 2'} item lg zeroMinWidth><Grid   container direction="column"><Card handleClickOpen ={this.handleClickOpen} value={value} index={index} deleteNoteById = {this.deleteNoteById} noteTypeToPrint= {this.noteTypeToPrint} viewVal={this.state.viewVal} onUpdateSubmit={this.onUpdateSubmit}/></Grid></Grid>
+          :''}
+          </div> : ''}
+
+          </div>
+        )
+        
+        )}
+    </Grid>
+      </div> : ''}
 
     <MuiThemeProvider theme={theme}>
     <Dialog

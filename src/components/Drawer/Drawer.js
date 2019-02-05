@@ -160,7 +160,8 @@ super(props)
 this.state = {
   open: false,
   anchorEl: null,
-  view:'213px'
+  view:'213px',
+  typeOfNote:'Keep'
 }
 this.viewValue = this.viewValue.bind(this);
 }
@@ -185,6 +186,11 @@ this.viewValue = this.viewValue.bind(this);
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
 };
+
+changeView = (e, viewType)=>{
+  e.preventDefault()
+  this.setState({typeOfNote:viewType})
+}
 
 logOut(e) {
     e.preventDefault()
@@ -232,7 +238,7 @@ handleMenuClose = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              Keep
+              {this.state.typeOfNote}
             </Typography>
             <div className={classes.search}>
                             <div className={classes.searchIcon}>
@@ -286,7 +292,7 @@ handleMenuClose = () => {
           </div>
           <Divider />
           <List>
-          <ListItem button key='Notes'>
+          <ListItem button key='Notes' onClick={(event)=>{this.changeView(event, 'Keep')}}>
             <ListItemIcon><Notes/></ListItemIcon>
             <ListItemText>Notes</ListItemText>
             </ListItem>
@@ -298,11 +304,11 @@ handleMenuClose = () => {
           <Divider />
           <List>
             
-      <ListItem button key='Archive'>
+      <ListItem button key='Archive' onClick={(event)=>{this.changeView(event, 'Archive')}}>
             <ListItemIcon><InboxIcon/></ListItemIcon>
-            <ListItemText>Archive</ListItemText>
+            <ListItemText>Archive</ListItemText>  
             </ListItem>
-            <ListItem button key='Delete'>
+            <ListItem button key='Delete' onClick={(event)=>{this.changeView(event, 'Trash')}}>
             <ListItemIcon><Delete/></ListItemIcon>
             <ListItemText>Trash</ListItemText>
             </ListItem>
@@ -310,7 +316,7 @@ handleMenuClose = () => {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <CardNote view={this.state.view}/>
+          <CardNote view={this.state.view} typeOfNote={this.state.typeOfNote}/>
         </main>
       </div>
     );
