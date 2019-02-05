@@ -6,6 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import jwt_decode from 'jwt-decode';
+import { CirclePicker } from 'react-color';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
 
 const styles = {
     card: {
@@ -40,7 +45,8 @@ class CardNote extends Component{
             label:this.props.value.label,
             photo:this.props.value.photo,
             reminder:this.props.value.reminder,
-            viewPx:this.props.viewVal
+            viewPx:this.props.viewVal,
+            open:false
         }
     }
 
@@ -70,6 +76,11 @@ class CardNote extends Component{
         }
 
         this.props.onUpdateSubmit(note, this.props.index);
+    }
+
+    colorPic = (e) =>{
+        e.preventDefault();
+        
     }
 
     onSubmitNoteType =async (e, isType)=>{
@@ -104,6 +115,9 @@ class CardNote extends Component{
 
         this.props.onUpdateSubmit(note, this.props.index);
     }
+    handleToggle = () => {
+        this.setState(state => ({ open: !state.open }));
+      };
 
     componentDidUpdate(prevProps){
         if(prevProps!==this.props){
@@ -140,8 +154,27 @@ class CardNote extends Component{
           : this.props.value.noteType !== 'isTrashed' ? <div className="p-2"> <img alt="archive" onClick ={(event)=> {this.onSubmitNoteType(event,'archive')}} src={require('../../Assests/images/archive.svg')}  />
           </div>
           : ''}
+
+
           <div className="p-2">
-          {this.props.value.noteType !== 'isTrashed' ? <img alt="color" src={require ('../../Assests/images/color.svg')}/> : ''}
+          {this.props.value.noteType !== 'isTrashed' ? <img onClick={this.colorPic} alt="color" src={require ('../../Assests/images/color.svg')}/> : ''}
+
+          <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                id="menu-list-grow"
+                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={this.handleClose}>
+                   
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+
           </div>
           {this.props.value.noteType === 'isTrashed' ? <div className="p-2"> <img alt="deleteForever" onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)} src={require('../../Assests/images/deleteForever.svg')}  />
           </div>
