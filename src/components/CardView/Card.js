@@ -133,13 +133,20 @@ class CardNote extends Component{
         </CardContent>
 
 
-      <div >
+      <div className="d-flex flex-row">
           
-          {this.props.value.noteType === 'isArchive' ? <img alt="unArchive" onClick ={(event)=> {this.onSubmitNoteType(event,'unArchive')}} src={require('../../Assests/images/unarchive.svg')}  />
-          : this.props.value.noteType !== 'isTrashed' ? <img alt="archive" onClick ={(event)=> {this.onSubmitNoteType(event,'archive')}} src={require('../../Assests/images/archive.svg')}  /> : ''}
-          {this.props.value.noteType === 'isTrashed' ? <img alt="deleteForever" onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)} src={require('../../Assests/images/deleteForever.svg')}  />
-          : <DeleteOutlinedIcon onClick ={(event) => {this.onSubmitNoteType(event,'trash')}} />  }
-                    {this.props.value.noteType === 'isTrashed' ? <img alt="restoreFromTrash" onClick ={(event) => {this.onSubmitNoteType(event,'restore')}} src={require('../../Assests/images/restoreFromTrash.svg')}  />
+          {this.props.value.noteType === 'isArchive' ? <div className="p-2"> <img alt="unArchive" onClick ={(event)=> {this.onSubmitNoteType(event,'unArchive')}} src={require('../../Assests/images/unarchive.svg')}  />
+          </div>
+          : this.props.value.noteType !== 'isTrashed' ? <div className="p-2"> <img alt="archive" onClick ={(event)=> {this.onSubmitNoteType(event,'archive')}} src={require('../../Assests/images/archive.svg')}  />
+          </div>
+          : ''}
+          <div className="p-2">
+          {this.props.value.noteType !== 'isTrashed' ? <img alt="color" src={require ('../../Assests/images/color.svg')}/> : ''}
+          </div>
+          {this.props.value.noteType === 'isTrashed' ? <div className="p-2"> <img alt="deleteForever" onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)} src={require('../../Assests/images/deleteForever.svg')}  />
+          </div>
+          :<div className="p-2"> <DeleteOutlinedIcon onClick ={(event) => {this.onSubmitNoteType(event,'trash')}} /></div>  }
+                    {this.props.value.noteType === 'isTrashed' ? <div className="p-2"> <img alt="restoreFromTrash" onClick ={(event) => {this.onSubmitNoteType(event,'restore')}} src={require('../../Assests/images/restoreFromTrash.svg')}  /></div>
           : ''  }
       </div>
          </Card>
