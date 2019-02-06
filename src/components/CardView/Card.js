@@ -48,9 +48,10 @@ class CardNote extends Component{
             viewPx:this.props.viewVal,
             open:false
         }
+        this.handleClose = this.handleClose.bind(this)
     }
 
-   onSubmitPinned =async (e)=>{
+   onSubmitPinned =async (e)=>{ 
         e.preventDefault()
         const token = localStorage.usertoken
         const decoded =await jwt_decode(token);
@@ -76,11 +77,6 @@ class CardNote extends Component{
         }
 
         this.props.onUpdateSubmit(note, this.props.index);
-    }
-
-    colorPic = (e) =>{
-        e.preventDefault();
-        
     }
 
     onSubmitNoteType =async (e, isType)=>{
@@ -119,6 +115,11 @@ class CardNote extends Component{
         this.setState(state => ({ open: !state.open }));
       };
 
+      handleChangeComplete = (color) => {
+        this.setState({ color: color.hex });
+        this.handleClose(color)
+      };
+
     componentDidUpdate(prevProps){
         if(prevProps!==this.props){
             this.setState({
@@ -128,10 +129,23 @@ class CardNote extends Component{
                })
         }
     }
+
+    handleToggle = () => {
+        this.setState(state => ({ open: !state.open }));
+      };
+    
+      handleClose = event => {
+        if (this.anchorEl.contains(event.target)) {
+          return;
+        }
+    
+        this.setState({ open: false });
+      };
     render(){
+        const { open } = this.state;
         return(
             <div>
-                <Card style={{width:this.state.viewPx}}>
+                <Card style={{width:this.state.viewPx, backgroundColor: this.state.color }}>
     
         <CardContent>
         <div className="d-flex justify-content-between">
@@ -157,7 +171,13 @@ class CardNote extends Component{
 
 
           <div className="p-2">
-          {this.props.value.noteType !== 'isTrashed' ? <img onClick={this.colorPic} alt="color" src={require ('../../Assests/images/color.svg')}/> : ''}
+          {this.props.value.noteType !== 'isTrashed' ? <img 
+          ref={node => {
+            this.anchorEl = node;
+          }} 
+            aria-owns={open ? 'menu-list-grow' : undefined}
+            aria-haspopup="true"
+            onClick={this.handleToggle} alt="color" src={require ('../../Assests/images/color.svg')}/> : ''}
 
           <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
             {({ TransitionProps, placement }) => (
@@ -168,7 +188,10 @@ class CardNote extends Component{
               >
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
-                   
+                  <CirclePicker
+                   color={ this.state.background }
+                   onChangeComplete={ this.handleChangeComplete }
+                   />
                   </ClickAwayListener>
                 </Paper>
               </Grow>
