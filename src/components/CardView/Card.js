@@ -49,9 +49,23 @@ class CardNote extends Component{
             open:false
         }
         this.handleClose = this.handleClose.bind(this)
+        this.inputOpenFileRef = React.createRef()
+        this.onChange = this.onChange.bind(this)
     }
 
-
+    onChange=(event)=>{
+        event.stopPropagation();
+    event.preventDefault();
+    event.persist();
+        console.log(event.target.files[0]);
+        // this.setState({photo:event.target.files[0]})
+        
+        // this.setState({[e.target.name]:e.target.value})
+        this.setState(prevState =>({
+            photo:event.target.files[0]
+          }))
+          console.log(this.state.photo)
+    }
     onSubmitColor =async (e)=>{
         const token = localStorage.usertoken
         const decoded =await jwt_decode(token);
@@ -70,6 +84,10 @@ class CardNote extends Component{
         }
 
         this.props.onUpdateSubmit(note, this.props.index);
+    }
+
+    showOpenFileDlg = () => {
+        this.inputOpenFileRef.current.click()
     }
 
    onSubmitPinned =async (e)=>{ 
@@ -180,6 +198,7 @@ class CardNote extends Component{
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
           </Typography>
+          {/* <img src={this.state.photo} alt=""/> */}
         </CardContent>
 
 
@@ -219,8 +238,14 @@ class CardNote extends Component{
               </Grow>
             )}
           </Popper>
-
+          
+           <input accept="image/*" name="photo" ref={this.inputOpenFileRef}  id="contained-button-file" style={{display:'none'}} type="file" 
+           onChange={this.onChange}/>
+           <img alt="UploadImage" onClick={this.showOpenFileDlg} style={{marginLeft:'15px'}} src={require('../../Assests/images/Image.svg')}  />
+          
           </div>
+          
+
           {this.props.value.noteType === 'isTrashed' ? <div className="p-2"> <img alt="deleteForever" onClick={()=>this.props.deleteNoteById(this.props.value, this.props.index)} src={require('../../Assests/images/deleteForever.svg')}  />
           </div>
           :<div className="p-2"> <DeleteOutlinedIcon onClick ={(event) => {this.onSubmitNoteType(event,'trash')}} /></div>  }
