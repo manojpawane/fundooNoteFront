@@ -54,17 +54,13 @@ class CardNote extends Component{
     }
 
     onChange=(event)=>{
-        event.stopPropagation();
+    event.stopPropagation();
     event.preventDefault();
     event.persist();
         console.log(event.target.files[0]);
-        // this.setState({photo:event.target.files[0]})
-        
-        // this.setState({[e.target.name]:e.target.value})
         this.setState(prevState =>({
-            photo:event.target.files[0]
+            photo:URL.createObjectURL(event.target.files[0])
           }))
-          console.log(this.state.photo)
     }
     onSubmitColor =async (e)=>{
         const token = localStorage.usertoken
@@ -198,7 +194,7 @@ class CardNote extends Component{
           <Typography component="p" onClick={() => this.props.handleClickOpen(this.props.value, this.props.index)}>
           {this.state.content}
           </Typography>
-          {/* <img src={this.state.photo} alt=""/> */}
+          <img style={{maxWidth:'185px'}} src={this.state.photo} alt=""/>
         </CardContent>
 
 
