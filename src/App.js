@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 class App extends Component {
   render() {
-
+//https://reacttraining.com/react-router/web/guides/primary-components
     function PrivateRoute({ component: Component, ...rest }) {
       return (
         <Route
